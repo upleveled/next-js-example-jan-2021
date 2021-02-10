@@ -1,6 +1,7 @@
 // 💥 DON'T COPY THIS - THIS IS JUST A SIMULATION OF SOMETHING
 // THAT WOULD ONLY WORK SERVER-SIDE
 import fs from 'fs';
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 console.log(fs && '');
 
 export function getTeamMembers() {
