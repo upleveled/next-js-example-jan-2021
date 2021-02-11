@@ -18,7 +18,7 @@ export default function SingleTeamMember(props) {
 }
 
 export async function getServerSideProps(context) {
-  const { getTeamMembers } = await import('../../database');
+  const { getTeamMembers } = await import('../../util/database');
 
   // Query will also include the query parameters from the URL
   // (the bit after the question mark eg. `?asdf=1`)
