@@ -31,6 +31,9 @@ export default function Layout(props) {
           <Link href="/about">
             <a>About</a>
           </Link>
+          <Link href="/team">
+            <a>Team</a>
+          </Link>
         </nav>
       </header>
 
