@@ -1,5 +1,5 @@
-import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import Head from 'next/head';
 import Layout from '../../components/Layout';
 import {
   incrementVisitsByTeamMember,
@@ -32,6 +32,18 @@ export default function SingleTeamMember(props) {
     setVisitsCookieClientSide(visits);
   }, [visits]);
 
+  if (!props.teamMember) {
+    return (
+      <Layout>
+        <Head>
+          <title>Team Member Not Found</title>
+        </Head>
+        <h1>Team Member Not Found</h1>
+        <p>Did you mean ...?</p>
+      </Layout>
+    );
+  }
+
   const visitsForTeamMember = visits.find(
     (teamMemberVisits) => teamMemberVisits.teamMemberId === props.teamMember.id,
   );
@@ -47,6 +59,24 @@ export default function SingleTeamMember(props) {
       <h2>id: {props.teamMember.id}</h2>
       <h2>First name: {props.teamMember.firstName}</h2>
       <h2>Last name: {props.teamMember.lastName}</h2>
+
+      <p>
+        <a href={`/team/update-first-name/${props.teamMember.id}`}>
+          Update name to Emilia
+        </a>
+      </p>
+
+      {/* FOR DEMO PURPOSES ONLY */}
+      {/* DON'T DO THIS */}
+      <h1>Danger Zone</h1>
+      <p>
+        <a
+          href={`/team/delete/${props.teamMember.id}`}
+          style={{ color: 'red' }}
+        >
+          Delete
+        </a>
+      </p>
 
       {/*
         3. Show the value on the page
@@ -71,7 +101,7 @@ export default function SingleTeamMember(props) {
 }
 
 export async function getServerSideProps(context) {
-  const { getTeamMembers } = await import('../../util/database');
+  const { getTeamMemberById } = await import('../../util/database');
 
   // Query will also include the query parameters from the URL
   // (the bit after the question mark eg. `?asdf=1`)
@@ -80,8 +110,11 @@ export async function getServerSideProps(context) {
 
   const id = context.query.teamMemberId;
 
-  const teamMembers = getTeamMembers();
-  const teamMember = teamMembers.find((member) => member.id === id);
+  const teamMember = await getTeamMemberById(id);
+
+  if (!teamMember) {
+    context.res.statusCode = 404;
+  }
 
   // 1. Read the cookie the first time
   const visits = context.req.cookies.visits;
@@ -89,7 +122,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      teamMember: teamMember,
+      teamMember: teamMember || null,
       visitsCookieValue: visitsCookieValue,
     },
   };

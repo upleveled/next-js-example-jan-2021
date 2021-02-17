@@ -53,7 +53,7 @@ export async function getServerSideProps() {
   // ...can also be written as a dynamic import, like this:
   const { getTeamMembers } = await import('../../util/database');
 
-  const teamMembers = getTeamMembers();
+  const teamMembers = await getTeamMembers();
 
   return {
     props: {
