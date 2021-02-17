@@ -2,7 +2,7 @@ const teamMembers = [
   { first_name: 'Karl', last_name: 'Horky' },
   { first_name: 'Gabriel', last_name: 'Bui' },
   { first_name: 'Samy', last_name: 'Hajar' },
-  { first_name: 'Johanna', last_name: 'Raihala' },
+  { first_name: 'Johanna', last_name: 'Räihälä' },
 ];
 
 exports.up = async (sql) => {
