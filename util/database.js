@@ -49,6 +49,18 @@ export async function getTeamMemberById(id) {
   return camelcaseRecords(teamMembers)[0];
 }
 
+export async function createTeamMember(firstName, lastName) {
+  const teamMembers = await sql`
+    INSERT INTO team_members
+      (first_name, last_name)
+    VALUES
+      (${firstName}, ${lastName})
+    RETURNING *
+  `;
+
+  return camelcaseRecords(teamMembers)[0];
+}
+
 export async function updateTeamMemberFirstNameById(id, firstName) {
   const teamMembers = await sql`
     UPDATE
