@@ -1,14 +1,22 @@
-import { useState } from 'react';
+import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Layout from '../../../components/Layout';
+import { TeamMember } from '../../../util/types';
 
-export default function EditTeamMember(props) {
+type Props = {
+  teamMember: TeamMember | null;
+};
+
+export default function EditTeamMember(props: Props) {
   const router = useRouter();
   const [firstName, setFirstName] = useState(props.teamMember?.firstName);
   const [draftFirstName, setDraftFirstName] = useState(firstName);
 
-  if (!props.teamMember) {
+  const propsTeamMember = props.teamMember;
+
+  if (propsTeamMember === null) {
     return (
       <Layout>
         <Head>
@@ -26,7 +34,7 @@ export default function EditTeamMember(props) {
         <title>Edit Team Member</title>
       </Head>
       <h1>Edit Team Member page</h1>
-      <h2>id: {props.teamMember.id}</h2>
+      <h2>id: {propsTeamMember.id}</h2>
       <h2>First name</h2>
       <input
         value={draftFirstName}
@@ -34,7 +42,7 @@ export default function EditTeamMember(props) {
       />
       <button
         onClick={async () => {
-          const response = await fetch(`/api/${props.teamMember.id}`, {
+          const response = await fetch(`/api/${propsTeamMember.id}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -60,10 +68,11 @@ export default function EditTeamMember(props) {
       <h1>Danger Zone</h1>
       <p>
         <button
+          data-cy="admin-team-member-button-delete"
           onClick={async () => {
             const confirmed = window.confirm('Really delete?');
             if (!confirmed) return;
-            await fetch(`/api/${props.teamMember.id}`, {
+            await fetch(`/api/${propsTeamMember.id}`, {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +89,7 @@ export default function EditTeamMember(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { getTeamMemberById } = await import('../../../util/database');
 
   // Query will also include the query parameters from the URL

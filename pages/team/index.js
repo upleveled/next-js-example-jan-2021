@@ -14,18 +14,20 @@ import Layout from '../../components/Layout';
 // code, and will have the props that were passed
 // in from the getServerSideProps function.
 export default function Team(props) {
-  console.log('props', props);
   return (
     <Layout>
       <Head>
         <title>Team</title>
       </Head>
 
-      <h1>Team page</h1>
+      <h1 data-cy="team-page-content-h1">Team page</h1>
 
-      <ul>
+      <ul data-cy="team-page-content-team-members">
         {props.teamMembers.map((teamMember) => (
-          <li key={`team-member-${teamMember.id}`}>
+          <li
+            key={`team-member-${teamMember.id}`}
+            data-cy="team-page-content-team-member"
+          >
             <Link href={`/team/${teamMember.id}`}>
               <a>
                 {teamMember.firstName} {teamMember.lastName}

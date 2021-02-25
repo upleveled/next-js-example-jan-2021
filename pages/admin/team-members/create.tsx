@@ -1,12 +1,21 @@
-import { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { ChangeEvent, useState } from 'react';
 import Layout from '../../../components/Layout';
 
 export default function CreateTeamMember() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const router = useRouter();
+
+  function handleFirstNameChange(event: ChangeEvent<HTMLInputElement>) {
+    setFirstName(event.currentTarget.value);
+  }
+
+  function handleLastNameChange(event: ChangeEvent<HTMLInputElement>) {
+    setLastName(event.currentTarget.value);
+  }
+
   return (
     <Layout>
       <Head>
@@ -29,23 +38,21 @@ export default function CreateTeamMember() {
         <label>
           First name
           <input
+            data-cy="admin-create-team-member-first-name"
             value={firstName}
-            onChange={(event) => {
-              setFirstName(event.currentTarget.value);
-            }}
+            onChange={handleFirstNameChange}
           />
         </label>
         <label>
           Last name
           <input
+            data-cy="admin-create-team-member-last-name"
             value={lastName}
-            onChange={(event) => {
-              setLastName(event.currentTarget.value);
-            }}
+            onChange={handleLastNameChange}
           />
         </label>
 
-        <button>Add Team Member</button>
+        <button type="submit">Add Team Member</button>
       </form>
     </Layout>
   );

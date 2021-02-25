@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import {
   incrementVisitsByTeamMember,
@@ -54,7 +54,7 @@ export default function SingleTeamMember(props) {
         <title>Single Team Member</title>
       </Head>
 
-      <h1>Single Team Member page</h1>
+      <h1 data-cy="team-member-page-content-h1">Single Team Member page</h1>
 
       <h2>id: {props.teamMember.id}</h2>
       <h2>First name: {props.teamMember.firstName}</h2>
@@ -81,9 +81,15 @@ export default function SingleTeamMember(props) {
       {/*
         3. Show the value on the page
       */}
-      <div>number of visits: {visitsForTeamMember?.visits || 0}</div>
+      <div>
+        number of visits:{' '}
+        <span data-cy="team-members-page-content-visits">
+          {visitsForTeamMember?.visits || 0}
+        </span>
+      </div>
 
       <button
+        data-cy="team-members-page-content-button-increase-visits"
         onClick={() => {
           // 4. Set a new value for the state variable
           // with the updated visit count

@@ -1,6 +1,10 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import { createTeamMember, getTeamMembers } from '../../util/database';
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   if (req.method === 'GET') {
     const teamMembers = await getTeamMembers();
     res.json({ teamMembers: teamMembers });

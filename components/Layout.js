@@ -29,10 +29,10 @@ export default function Layout(props) {
             <a>Home</a>
           </Link>
           <Link href="/about">
-            <a>About</a>
+            <a data-cy="header-about">About</a>
           </Link>
           <Link href="/team">
-            <a>Team</a>
+            <a data-cy="header-team">Team</a>
           </Link>
         </nav>
       </header>
