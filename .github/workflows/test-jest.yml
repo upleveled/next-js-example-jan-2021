@@ -1,4 +1,4 @@
-name: yarn jest
+name: Jest tests
 on: push
 
 jobs:
