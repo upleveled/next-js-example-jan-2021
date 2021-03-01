@@ -1,5 +1,8 @@
 import camelcaseKeys from 'camelcase-keys';
 import postgres from 'postgres';
+import setPostgresDefaultsOnHeroku from './setPostgresDefaultsOnHeroku';
+
+setPostgresDefaultsOnHeroku();
 
 // Read in the values from the .env file
 // (which should be ignored in Git!)
