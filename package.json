@@ -51,5 +51,8 @@
     "testPathIgnorePatterns": [
       "<rootDir>/cypress"
     ]
-  }
+  },
+  "cacheDirectories": [
+    ".next/cache"
+  ]
 }
