@@ -47,11 +47,6 @@
     "ley": "^0.6.0",
     "typescript": "4.1.5"
   },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/cypress"
-    ]
-  },
   "cacheDirectories": [
     ".next/cache"
   ]
