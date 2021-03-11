@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import Layout from '../../components/Layout';
 import {
   incrementVisitsByTeamMember,
   setVisitsCookieClientSide,
@@ -34,13 +33,13 @@ export default function SingleTeamMember(props) {
 
   if (!props.teamMember) {
     return (
-      <Layout>
+      <>
         <Head>
           <title>Team Member Not Found</title>
         </Head>
         <h1>Team Member Not Found</h1>
         <p>Did you mean ...?</p>
-      </Layout>
+      </>
     );
   }
 
@@ -49,7 +48,7 @@ export default function SingleTeamMember(props) {
   );
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Single Team Member</title>
       </Head>
@@ -102,7 +101,7 @@ export default function SingleTeamMember(props) {
       >
         increase visits
       </button>
-    </Layout>
+    </>
   );
 }
 

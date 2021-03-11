@@ -10,6 +10,14 @@ const headerStyles = css`
   a + a {
     margin-left: 15px;
   }
+
+  nav {
+    display: flex;
+  }
+
+  div {
+    margin-left: auto;
+  }
 `;
 
 export default function Layout(props) {
@@ -34,6 +42,22 @@ export default function Layout(props) {
           <Link href="/team">
             <a data-cy="header-team">Team</a>
           </Link>
+          <div>
+            {!props.isSessionValid ? (
+              <>
+                <Link href="/register">
+                  <a data-cy="header-register">Register</a>
+                </Link>
+                <Link href="/login">
+                  <a data-cy="header-login">Login</a>
+                </Link>
+              </>
+            ) : (
+              <Link href="/logout">
+                <a data-cy="header-logout">Logout</a>
+              </Link>
+            )}
+          </div>
         </nav>
       </header>
 

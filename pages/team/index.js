@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Layout from '../../components/Layout';
 
 // 💥 Importing and using server-side code in this
 // file at the top will not work! It will lead to
@@ -15,7 +14,7 @@ import Layout from '../../components/Layout';
 // in from the getServerSideProps function.
 export default function Team(props) {
   return (
-    <Layout>
+    <>
       <Head>
         <title>Team</title>
       </Head>
@@ -36,7 +35,7 @@ export default function Team(props) {
           </li>
         ))}
       </ul>
-    </Layout>
+    </>
   );
 }
 

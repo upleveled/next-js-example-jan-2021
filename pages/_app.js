@@ -1,6 +1,22 @@
 import { css, Global } from '@emotion/react';
+import { useEffect, useState } from 'react';
+import Layout from '../components/Layout';
 
-function MyApp({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
+  const [isSessionStateStale, setIsSessionStateStale] = useState(true);
+  const [isSessionValid, setIsSessionValid] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('/api/is-session-valid');
+      const newValue = (await response.json()).isSessionValid;
+      setIsSessionValid(newValue);
+      setIsSessionStateStale(false);
+    }
+
+    if (isSessionStateStale) fetchData();
+  }, [isSessionStateStale]);
+
   return (
     <>
       <Global
@@ -16,9 +32,12 @@ function MyApp({ Component, pageProps }) {
           }
         `}
       />
-      <Component {...pageProps} />
+      <Layout isSessionValid={isSessionValid}>
+        <Component
+          {...pageProps}
+          setIsSessionStateStale={setIsSessionStateStale}
+        />
+      </Layout>
     </>
   );
 }
-
-export default MyApp;

@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Layout from '../../../components/Layout';
 
 export default function DeleteTeamMember(props) {
   if (!props.teamMember) {
@@ -7,7 +6,7 @@ export default function DeleteTeamMember(props) {
   }
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Deleted a team member!</title>
       </Head>
@@ -19,7 +18,7 @@ export default function DeleteTeamMember(props) {
       <div>id: {props.teamMember.id}</div>
       <div>first name: {props.teamMember.firstName}</div>
       <div>last name: {props.teamMember.lastName}</div>
-    </Layout>
+    </>
   );
 }
 

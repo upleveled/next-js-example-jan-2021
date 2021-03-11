@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Layout from '../../../components/Layout';
 
 export default function UpdateFirstNameOfTeamMember(props) {
   if (!props.teamMember) {
@@ -7,7 +6,7 @@ export default function UpdateFirstNameOfTeamMember(props) {
   }
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Updated a team member first name!</title>
       </Head>
@@ -21,7 +20,7 @@ export default function UpdateFirstNameOfTeamMember(props) {
       <div>id: {props.teamMember.id}</div>
       <div>first name: {props.teamMember.firstName}</div>
       <div>last name: {props.teamMember.lastName}</div>
-    </Layout>
+    </>
   );
 }
 

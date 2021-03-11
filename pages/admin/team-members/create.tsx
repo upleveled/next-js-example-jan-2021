@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from 'react';
-import Layout from '../../../components/Layout';
 
 export default function CreateTeamMember() {
   const [firstName, setFirstName] = useState('');
@@ -17,7 +16,7 @@ export default function CreateTeamMember() {
   }
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Add a new team member</title>
       </Head>
@@ -54,6 +53,6 @@ export default function CreateTeamMember() {
 
         <button type="submit">Add Team Member</button>
       </form>
-    </Layout>
+    </>
   );
 }

@@ -2,7 +2,6 @@ import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import Layout from '../../../components/Layout';
 import { TeamMember } from '../../../util/types';
 
 type Props = {
@@ -18,18 +17,18 @@ export default function EditTeamMember(props: Props) {
 
   if (propsTeamMember === null) {
     return (
-      <Layout>
+      <>
         <Head>
           <title>Team Member Not Found</title>
         </Head>
         <h1>Team Member Not Found</h1>
         <p>Did you mean ...?</p>
-      </Layout>
+      </>
     );
   }
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Edit Team Member</title>
       </Head>
@@ -85,7 +84,7 @@ export default function EditTeamMember(props: Props) {
           Delete
         </button>
       </p>
-    </Layout>
+    </>
   );
 }
 

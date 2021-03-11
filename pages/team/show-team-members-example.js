@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Layout from '../../components/Layout';
+import { useState } from 'react';
 
 export default function Team() {
   const [teamMembers, setTeamMembers] = useState([]);
@@ -13,7 +12,7 @@ export default function Team() {
   }
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Team</title>
       </Head>
@@ -33,6 +32,6 @@ export default function Team() {
           </li>
         ))}
       </ul>
-    </Layout>
+    </>
   );
 }
