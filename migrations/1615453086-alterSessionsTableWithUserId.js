@@ -3,7 +3,7 @@ exports.up = async (sql) => {
     ALTER TABLE
       sessions
     ADD COLUMN
-      user_id INT REFERENCES users (id)
+      user_id INT REFERENCES users (id) ON DELETE CASCADE
   `;
 };
 
