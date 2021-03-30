@@ -1,21 +1,19 @@
 import { css, Global } from '@emotion/react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 
 export default function App({ Component, pageProps }) {
-  const [isSessionStateStale, setIsSessionStateStale] = useState(true);
   const [isSessionValid, setIsSessionValid] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('/api/is-session-valid');
-      const newValue = (await response.json()).isSessionValid;
-      setIsSessionValid(newValue);
-      setIsSessionStateStale(false);
-    }
+  const refreshIsSessionValid = useCallback(async () => {
+    const response = await fetch('/api/is-session-valid');
+    const newValue = (await response.json()).isSessionValid;
+    setIsSessionValid(newValue);
+  }, []);
 
-    if (isSessionStateStale) fetchData();
-  }, [isSessionStateStale]);
+  useEffect(() => {
+    refreshIsSessionValid();
+  }, [refreshIsSessionValid]);
 
   return (
     <>
@@ -35,7 +33,7 @@ export default function App({ Component, pageProps }) {
       <Layout isSessionValid={isSessionValid}>
         <Component
           {...pageProps}
-          setIsSessionStateStale={setIsSessionStateStale}
+          refreshIsSessionValid={refreshIsSessionValid}
         />
       </Layout>
     </>

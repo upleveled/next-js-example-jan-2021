@@ -1,12 +1,12 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { Error } from '../util/types';
 
 type Props = {
   csrfToken: string;
-  setIsSessionStateStale: Dispatch<SetStateAction<boolean>>;
+  refreshIsSessionValid: () => Promise<void>;
 };
 
 export default function Login(props: Props) {
@@ -49,7 +49,7 @@ export default function Login(props: Props) {
             : router.query.returnTo;
 
           router.push(returnTo || `/profile/${user.id}`);
-          props.setIsSessionStateStale(true);
+          props.refreshIsSessionValid();
         }}
       >
         <label>

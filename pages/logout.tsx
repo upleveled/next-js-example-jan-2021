@@ -1,13 +1,13 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { useEffect } from 'react';
 
 type Props = {
-  setIsSessionStateStale: Dispatch<SetStateAction<boolean>>;
+  refreshIsSessionValid: () => Promise<void>;
 };
 export default function Logout(props: Props) {
   useEffect(() => {
-    props.setIsSessionStateStale(true);
+    props.refreshIsSessionValid();
   }, [props]);
   return (
     <>
